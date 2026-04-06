@@ -1,0 +1,60 @@
+2026-04-06 04:17:23 - Iniciando registrar_compra.php
+Usuario ID: 1
+JSON recibido: {"item_id":"harina","item_nombre":"Harina","precio":10}
+Datos decodificados: Array
+(
+    [item_id] => harina
+    [item_nombre] => Harina
+    [precio] => 10
+)
+
+Valores: item_id=harina, item_nombre=Harina, precio=10
+❌ Error PDO: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sweet bakery.compras' doesn't exist
+2026-04-06 04:17:25 - Iniciando registrar_compra.php
+Usuario ID: 1
+JSON recibido: {"item_id":"mantequilla","item_nombre":"Mantequilla","precio":15}
+Datos decodificados: Array
+(
+    [item_id] => mantequilla
+    [item_nombre] => Mantequilla
+    [precio] => 15
+)
+
+Valores: item_id=mantequilla, item_nombre=Mantequilla, precio=15
+❌ Error PDO: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sweet bakery.compras' doesn't exist
+2026-04-06 04:17:27 - Iniciando registrar_compra.php
+Usuario ID: 1
+JSON recibido: {"item_id":"azucar","item_nombre":"Azúcar","precio":8}
+Datos decodificados: Array
+(
+    [item_id] => azucar
+    [item_nombre] => Azúcar
+    [precio] => 8
+)
+
+Valores: item_id=azucar, item_nombre=Azúcar, precio=8
+❌ Error PDO: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sweet bakery.compras' doesn't exist
+2026-04-06 04:18:39 - Iniciando registrar_compra.php
+Usuario ID: 1
+JSON recibido: {"item_id":"azucar","item_nombre":"Azúcar","precio":8}
+Datos decodificados: Array
+(
+    [item_id] => azucar
+    [item_nombre] => Azúcar
+    [precio] => 8
+)
+
+Valores: item_id=azucar, item_nombre=Azúcar, precio=8
+❌ Error PDO: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sweet bakery.compras' doesn't exist
+2026-04-06 04:21:15 - Iniciando registrar_compra.php
+Usuario ID: 1
+JSON recibido: {"item_id":"agua","item_nombre":"Agua","precio":5}
+Datos decodificados: Array
+(
+    [item_id] => agua
+    [item_nombre] => Agua
+    [precio] => 5
+)
+
+Valores: item_id=agua, item_nombre=Agua, precio=5
+❌ Error PDO: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sweet bakery.compras' doesn't exist

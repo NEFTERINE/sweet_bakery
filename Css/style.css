@@ -1,0 +1,1073 @@
+/* =============================================
+   VARIABLES DE COLORES (MÁS VIVOS PARA NIÑOS)
+   ============================================= */
+:root {
+  --background: #FFF9F0;
+  --foreground: #5C3E2B;
+  --card: #FFFFFF;
+  --card-foreground: #5C3E2B;
+  --primary: #FF9F4A;
+  --primary-foreground: #FFFFFF;
+  --secondary: #FFE4C4;
+  --secondary-foreground: #5C3E2B;
+  --muted: #FFF0E0;
+  --muted-foreground: #B67B5C;
+  --accent: #FFB347;
+  --accent-foreground: #FFFFFF;
+  --border: #FFDAB9;
+  --gold: #FFD966;
+  --gold-dark: #FFC107;
+  --wood: #D9A066;
+  --wood-light: #F4C28C;
+  --oven: #8B5A2B;
+  --oven-glow: #FF8C42;
+  --radius: 24px;
+  
+  /* Nuevos colores divertidos */
+  --pink: #FFB7C5;
+  --mint: #C1F0DC;
+  --lavender: #E6D5FF;
+  --peach: #FFDAB9;
+  --coral: #FF8A7A;
+  --sky: #B5E4FF;
+  --bubble: #FFE5B4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Comic Neue', 'Comic Neue', 'Segoe UI Emoji', 'Chalkboard SE', 'Comic Sans MS', cursive, sans-serif;
+  background: linear-gradient(135deg, #FFF9F0 0%, #FFE9CE 100%);
+  color: var(--foreground);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Fondo con sprinkles decorativos */
+body::before {
+  content: "🧁 🍪 🎂 🍩 🥧 🍰";
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 40px;
+  opacity: 0.1;
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* =============================================
+   MENÚ DE NAVEGACIÓN
+   ============================================= */
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #FFE4B5 0%, #FFD4A0 100%);
+  border-bottom: 4px solid var(--gold);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-tab {
+  padding: 14px 28px;
+  border: none;
+  background: linear-gradient(135deg, #FFF9F0 0%, #FFEFDF 100%);
+  color: var(--foreground);
+  border-radius: 60px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border: 2px solid var(--gold);
+}
+
+.nav-tab:hover {
+  transform: translateY(-4px) scale(1.05);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFE4C4 100%);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.nav-tab.active {
+  background: linear-gradient(135deg, #FF9F4A 0%, #FFB347 100%);
+  color: white;
+  border-color: white;
+  box-shadow: 0 6px 20px rgba(255, 159, 74, 0.5);
+}
+
+.nav-tab span {
+  font-size: 24px;
+}
+
+/* =============================================
+   MÓDULO GENERAL
+   ============================================= */
+.module {
+  display: none;
+  padding: 30px;
+  max-width: 1300px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.module.active {
+  display: block;
+}
+
+/* Header con monedas */
+.module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  background: linear-gradient(135deg, #FFF5E6, #FFECD9);
+  padding: 20px 30px;
+  border-radius: 60px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  border: 2px solid var(--gold);
+}
+
+.module-title {
+  font-size: 36px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FF9F4A, #FF6B4A);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.coin-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #FFD966 0%, #FFC107 100%);
+  padding: 12px 28px;
+  border-radius: 60px;
+  font-weight: 800;
+  font-size: 24px;
+  color: #5C3E2B;
+  box-shadow: 0 6px 12px rgba(255, 193, 7, 0.4);
+  border: 2px solid white;
+}
+
+.coin-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #FFE55C, #FFB347);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8B5A2B;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* =============================================
+   COCINA - MÓDULO PRINCIPAL
+   ============================================= */
+.kitchen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.kitchen-item {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F0 100%);
+  border-radius: 40px;
+  padding: 30px 20px;
+  border: 3px solid var(--gold);
+  cursor: pointer;
+  /* transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.kitchen-item::before {
+  content: "✨";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 60px;
+  opacity: 0.2;
+  /* transform: rotate(15deg); */
+  pointer-events: none;
+}
+
+.kitchen-item:hover {
+  /* transform: translateY(-12px) scale(1.02); */
+  box-shadow: 0 20px 40px rgba(255, 159, 74, 0.3);
+  border-color: #FF9F4A;
+}
+
+.kitchen-item-icon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, #FFE4C4 0%, #FFD4A8 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.kitchen-item-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #FF8C42;
+}
+
+.kitchen-item-desc {
+  font-size: 16px;
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+
+/* Libro de Recetas */
+.kitchen-item:first-child .kitchen-item-icon {
+  background: linear-gradient(135deg, #C1F0DC, #A8E6CF);
+}
+
+/* Horno Especial */
+.oven-item .kitchen-item-icon {
+  background: linear-gradient(135deg, #8B5A2B 0%, #B67B5C 100%);
+  position: relative;
+  animation: ovenPulse 2s ease-in-out infinite;
+}
+
+@keyframes ovenPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 140, 66, 0.4); }
+  50% { box-shadow: 0 0 0 15px rgba(255, 140, 66, 0.2); }
+}
+
+.oven-item .kitchen-item-icon::after {
+  content: "🔥";
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  font-size: 32px;
+  animation: fire 1s ease-in-out infinite;
+}
+
+@keyframes fire {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* Alcancía Mágica */
+.coin-generator {
+  background: linear-gradient(135deg, #FFE5B4, #FFD4A0);
+}
+
+.coin-generator .kitchen-item-icon {
+  background: linear-gradient(135deg, #FFD966, #FFC107);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.coin-generator:active .kitchen-item-icon {
+  animation: coinPop 0.3s ease;
+}
+
+@keyframes coinPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1.1); }
+}
+
+/* =============================================
+   MODALES (VENTANAS EMERGENTES)
+   ============================================= */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  backdrop-filter: blur(5px);
+}
+
+.modal-overlay.active {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF9F0 100%);
+  border-radius: 48px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  border: 3px solid var(--gold);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 30px;
+  border-bottom: 3px solid var(--gold);
+  background: linear-gradient(135deg, #FFE4C4, #FFD4A8);
+  border-radius: 45px 45px 0 0;
+}
+
+.modal-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #FF8C42;
+}
+
+.modal-close {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.modal-close:hover {
+  background: #FF8C42;
+  color: white;
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  padding: 30px;
+}
+
+/* =============================================
+   LIBRO DE RECETAS
+   ============================================= */
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.recipe-card {
+  background: linear-gradient(135deg, #FFF9F0 0%, #FFEFDF 100%);
+  border-radius: 28px;
+  padding: 20px;
+  text-align: center;
+  border: 2px solid #FFD966;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  border-color: #FF9F4A;
+  box-shadow: 0 12px 24px rgba(255, 159, 74, 0.2);
+}
+
+.recipe-card.locked {
+  opacity: 0.6;
+  filter: grayscale(0.3);
+}
+
+.recipe-icon {
+  font-size: 64px;
+  margin-bottom: 12px;
+}
+
+.recipe-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #FF8C42;
+}
+
+.recipe-ingredients {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  margin-bottom: 12px;
+}
+
+.recipe-status {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.recipe-status.unlocked {
+  background: linear-gradient(135deg, #C1F0DC, #A8E6CF);
+  color: #2D6A4F;
+}
+
+.recipe-status.locked {
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
+
+/* =============================================
+   HORNO - MÁGICO Y DIVERTIDO
+   ============================================= */
+.oven-interior {
+  background: linear-gradient(180deg, #8B5A2B 0%, #5C3E2B 100%);
+  border-radius: 32px;
+  padding: 40px;
+  margin-bottom: 30px;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.5), 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.oven-interior::before {
+  content: "🔥";
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 40px;
+  animation: fireGlow 1s ease-in-out infinite;
+}
+
+.oven-interior::after {
+  content: "🔥";
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 40px;
+  animation: fireGlow 1s ease-in-out infinite 0.5s;
+}
+
+@keyframes fireGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.oven-slots {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.oven-slot {
+  width: 100px;
+  height: 100px;
+  background: rgba(0,0,0,0.4);
+  border: 3px dashed rgba(255,255,255,0.5);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  cursor: pointer;
+  transition: all 0.3s;
+  backdrop-filter: blur(5px);
+}
+
+.oven-slot:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: #FFD966;
+  transform: scale(1.05);
+}
+
+.oven-slot.filled {
+  background: #FFE4C4;
+  border-style: solid;
+  border-color: #FF9F4A;
+  animation: slotPop 0.3s ease;
+}
+
+@keyframes slotPop {
+  0% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.inventory-section {
+  background: linear-gradient(135deg, #FFF0E0, #FFE4C4);
+  border-radius: 28px;
+  padding: 24px;
+  margin-top: 20px;
+}
+
+.inventory-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #FF8C42;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inventory-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.inventory-item {
+  background: white;
+  border: 2px solid #FFD966;
+  border-radius: 20px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 85px;
+}
+
+.inventory-item:hover {
+  border-color: #FF9F4A;
+  transform: scale(1.05);
+  background: #FFF9F0;
+}
+
+.inventory-item-icon {
+  font-size: 36px;
+  margin-bottom: 4px;
+}
+
+.inventory-item-name {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.inventory-item-qty {
+  font-size: 11px;
+  color: #FF8C42;
+  font-weight: bold;
+}
+
+.bake-button {
+  width: 100%;
+  padding: 18px;
+  margin-top: 24px;
+  background: linear-gradient(135deg, #FF9F4A 0%, #FF6B4A 100%);
+  color: white;
+  border: none;
+  border-radius: 60px;
+  font-size: 22px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 8px 16px rgba(255, 107, 74, 0.3);
+}
+
+.bake-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(255, 107, 74, 0.4);
+}
+
+.bake-button:disabled {
+  background: #E0C8A8;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* =============================================
+   TIENDA
+   ============================================= */
+.shop-categories {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  padding: 12px 24px;
+  border: 2px solid #FFD966;
+  background: white;
+  border-radius: 60px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.category-btn:hover {
+  border-color: #FF9F4A;
+  transform: translateY(-2px);
+}
+
+.category-btn.active {
+  background: linear-gradient(135deg, #FF9F4A, #FFB347);
+  color: white;
+  border-color: white;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.shop-item {
+  background: white;
+  border-radius: 32px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.3s;
+  border: 2px solid #FFD966;
+}
+
+.shop-item:hover {
+  transform: translateY(-8px);
+  border-color: #FF9F4A;
+  box-shadow: 0 12px 28px rgba(255, 159, 74, 0.2);
+}
+
+.shop-item-icon {
+  font-size: 56px;
+  margin-bottom: 12px;
+}
+
+.shop-item-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.shop-item-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #FFC107;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.buy-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #FF9F4A, #FFB347);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.buy-btn:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 159, 74, 0.4);
+}
+
+.buy-btn:disabled {
+  background: #E0C8A8;
+  cursor: not-allowed;
+}
+
+/* =============================================
+   MEDALLAS
+   ============================================= */
+.medals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 24px;
+}
+
+.medal-card {
+  background: white;
+  border-radius: 32px;
+  padding: 24px 16px;
+  text-align: center;
+  transition: all 0.3s;
+  border: 2px solid #FFD966;
+}
+
+.medal-card.earned {
+  background: linear-gradient(135deg, #FFF5E6, #FFE9D0);
+  border-color: #FFC107;
+  animation: medalSparkle 0.5s ease;
+}
+
+@keyframes medalSparkle {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4); }
+  50% { box-shadow: 0 0 0 15px rgba(255, 193, 7, 0.2); }
+}
+
+.medal-card.locked {
+  opacity: 0.5;
+  filter: grayscale(0.3);
+}
+
+.medal-icon {
+  font-size: 64px;
+  margin-bottom: 12px;
+}
+
+.medal-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.medal-date {
+  font-size: 11px;
+  color: #FF8C42;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  background: #F0E0D0;
+  border-radius: 60px;
+  height: 32px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #FF9F4A, #FFD966);
+  height: 100%;
+  border-radius: 60px;
+  transition: width 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 800;
+  font-size: 14px;
+  color: #5C3E2B;
+  text-shadow: 0 1px 0 white;
+}
+
+/* =============================================
+   TOAST NOTIFICACIONES
+   ============================================= */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: linear-gradient(135deg, #5C3E2B, #8B5A2B);
+  color: #FFD966;
+  padding: 16px 32px;
+  border-radius: 60px;
+  font-weight: bold;
+  font-size: 18px;
+  z-index: 2000;
+  opacity: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border: 2px solid #FFD966;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* =============================================
+   ANIMACIONES EXTRAS
+   ============================================= */
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+.shake {
+  animation: shake 0.3s ease;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 768px) {
+  .module {
+    padding: 20px;
+  }
+  
+  .module-title {
+    font-size: 28px;
+  }
+  
+  .kitchen-item-icon {
+    width: 90px;
+    height: 90px;
+    font-size: 48px;
+  }
+  
+  .kitchen-item-title {
+    font-size: 22px;
+  }
+  
+  .nav-tab {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .oven-slot {
+    width: 70px;
+    height: 70px;
+    font-size: 32px;
+  }
+}
+
+/* Decoración extra - caritas felices */
+.module.active::after {
+  content: "🍰 🧁 🍪";
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 30px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+
+/* =============================================
+   ANIMACIONES DE CONFETI Y MONEDAS
+   ============================================= */
+
+/* Contenedor de confeti */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  opacity: 0.8;
+  animation: confettiFall 3s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Animación de monedas voladoras */
+.coin-particle {
+  position: fixed;
+  font-size: 30px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: coinFly 1s ease-out forwards;
+}
+
+@keyframes coinFly {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(var(--tx, 50px), var(--ty, -100px)) scale(1.2) rotate(180deg);
+  }
+  100% {
+    transform: translate(var(--tx2, 100px), var(--ty2, -200px)) scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Animación de estrellas */
+.star-particle {
+  position: fixed;
+  font-size: 24px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: starTwinkle 1s ease-out forwards;
+}
+
+@keyframes starTwinkle {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Animación de "¡NUEVA RECETA!" */
+.recipe-celebration {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #FFD966, #FF9F4A);
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+  padding: 20px 40px;
+  border-radius: 60px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 10000;
+  white-space: nowrap;
+  animation: celebrationPop 0.5s ease-out forwards;
+  font-family: inherit;
+  border: 3px solid white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+@keyframes celebrationPop {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.recipe-celebration.fade-out {
+  animation: celebrationFadeOut 0.5s ease-out forwards;
+}
+
+@keyframes celebrationFadeOut {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Animación de monedas en la alcancía */
+.coin-burst {
+  position: fixed;
+  font-size: 28px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: coinBurst 0.8s ease-out forwards;
+}
+
+@keyframes coinBurst {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx, 50px), var(--dy, -80px)) scale(0) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+/* Animación de números flotantes (+monedas) */
+.floating-number {
+  position: fixed;
+  font-size: 36px;
+  font-weight: bold;
+  color: #FFD966;
+  text-shadow: 2px 2px 4px #5C3E2B;
+  pointer-events: none;
+  z-index: 9999;
+  animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50px) scale(1.2);
+  }
+  100% {
+    transform: translateY(-100px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+/* Efecto de brillo en el horno cuando hornea */
+.oven-flash {
+  animation: ovenFlash 0.3s ease-out;
+}
+
+@keyframes ovenFlash {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 140, 66, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 30px rgba(255, 140, 66, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 140, 66, 0);
+  }
+}
