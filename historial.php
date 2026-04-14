@@ -1,32 +1,46 @@
 <?php
 session_start();
-require_once 'controler/conexion.php';
 
-// Verificar si está logueado
-if (!isset($_SESSION['usuario_id'])) {
+if (!isset($_SESSION['usuario_tipo']) || $_SESSION['usuario_tipo'] !== 'admin') {
     header('Location: login.php');
     exit;
 }
 
-$usuario_id = $_SESSION['usuario_id'];
+require_once 'controler/conexion.php';
 
 // Obtener historial de compras
-$stmt_compras = $pdo->prepare("SELECT * FROM historial_compras WHERE usuario_id = ? ORDER BY fecha DESC LIMIT 50");
-$stmt_compras->execute([$usuario_id]);
+$stmt_compras = $pdo->query("
+    SELECT hc.*, u.nombre_usuario 
+    FROM historial_compras hc
+    JOIN usuarios u ON hc.usuario_id = u.id
+    ORDER BY hc.fecha DESC 
+    LIMIT 50
+");
 $compras = $stmt_compras->fetchAll();
 
 // Obtener historial de horneados
-$stmt_horneados = $pdo->prepare("SELECT * FROM historial_horneados WHERE usuario_id = ? ORDER BY fecha DESC LIMIT 50");
-$stmt_horneados->execute([$usuario_id]);
+$stmt_horneados = $pdo->query("
+    SELECT hh.*, u.nombre_usuario 
+    FROM historial_horneados hh
+    JOIN usuarios u ON hh.usuario_id = u.id
+    ORDER BY hh.fecha DESC 
+    LIMIT 50
+");
 $horneados = $stmt_horneados->fetchAll();
 
 // Obtener estadísticas
-$stmt_stats = $pdo->prepare("SELECT monedas_gastadas, total_horneados FROM progreso_juego WHERE usuario_id = ?");
-$stmt_stats->execute([$usuario_id]);
+$stmt_stats = $pdo->query("
+    SELECT 
+        SUM(monedas_gastadas) as total_monedas,
+        SUM(total_horneados) as total_horneados
+    FROM progreso_juego
+");
 $stats = $stmt_stats->fetch();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,92 +52,142 @@ $stats = $stmt_stats->fetch();
             margin: 0 auto;
             padding: 20px;
         }
+
+        /* 🔥 TITULO */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* 📊 STATS */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-bottom: 40px;
         }
+
         .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b6b, #ff9a9e);
             color: white;
-            padding: 20px;
-            border-radius: 15px;
+            padding: 25px;
+            border-radius: 20px;
             text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
         .stat-value {
             font-size: 2.5em;
             font-weight: bold;
         }
+
         .stat-label {
             font-size: 0.9em;
             opacity: 0.9;
             margin-top: 10px;
         }
+
+        /* 📦 SECCIONES */
         .history-section {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 25px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
         }
+
         .section-title {
-            font-size: 1.5em;
+            font-size: 1.4em;
             margin-bottom: 20px;
-            color: #333;
-            border-left: 4px solid #ff6b6b;
-            padding-left: 15px;
+            color: #444;
+            border-left: 5px solid #ff6b6b;
+            padding-left: 12px;
         }
+
+        /* 📋 TABLAS */
         .history-table {
             width: 100%;
             border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 15px;
         }
-        .history-table th,
+
+        .history-table th {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px;
+        }
+
         .history-table td {
             padding: 12px;
-            text-align: left;
             border-bottom: 1px solid #eee;
         }
-        .history-table th {
-            background: #f8f9fa;
-            font-weight: bold;
-            color: #555;
+
+        .history-table tr {
+            transition: 0.2s;
         }
+
         .history-table tr:hover {
-            background: #f8f9fa;
+            background: #fff0f0;
         }
+
+        /* 🏷 BADGE */
         .badge-new {
             background: #4caf50;
             color: white;
-            padding: 4px 8px;
-            border-radius: 12px;
+            padding: 5px 10px;
+            border-radius: 15px;
             font-size: 0.75em;
         }
+
+        /* 😢 EMPTY STATE */
         .empty-state {
             text-align: center;
-            padding: 40px;
-            color: #999;
+            padding: 50px;
+            color: #888;
         }
-        .icon-cell {
-            font-size: 1.5em;
+
+        .empty-state div {
+            margin-bottom: 10px;
         }
+
+        /* 🔘 BOTONES */
+        .buy-btn {
+            margin-top: 15px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #ff4d4d;
+        }
+
+        /* 📱 RESPONSIVE */
         @media (max-width: 768px) {
             .history-table {
                 font-size: 0.85em;
             }
-            .history-table th,
-            .history-table td {
-                padding: 8px;
-            }
         }
     </style>
 </head>
+
 <body>
     <?php require_once 'menu.php'; ?>
-    
+
     <div class="history-container">
         <h1>📜 Mi Historial</h1>
-        
+
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-value"><?php echo number_format($stats['monedas_gastadas'] ?? 0); ?></div>
@@ -142,31 +206,40 @@ $stats = $stmt_stats->fetch();
                 <div class="stat-label">🔥 Horneados Registrados</div>
             </div>
         </div>
-        
+
         <div class="history-section">
             <h2 class="section-title">🛍️ Historial de Compras</h2>
-            
+
             <?php if (count($compras) > 0): ?>
                 <table class="history-table">
                     <thead>
                         <tr>
+                            <th>Usuario</th>
                             <th>Fecha</th>
                             <th>Item</th>
                             <th>Nombre</th>
                             <th>Cantidad</th>
                             <th>Precio</th>
                             <th>Total</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($compras as $compra): ?>
                             <tr>
+                                <td><?php echo htmlspecialchars($compra['nombre_usuario']); ?></td>
+
                                 <td><?php echo date('d/m/Y H:i', strtotime($compra['fecha'])); ?></td>
-                                <td class="icon-cell"><?php echo $compra['item_icono']; ?></td>
+
+                                <td>🧾</td>
+
                                 <td><?php echo htmlspecialchars($compra['item_nombre']); ?></td>
-                                <td>x<?php echo $compra['cantidad']; ?></td>
+
+                                <td>x1</td>
+
                                 <td>$<?php echo number_format($compra['precio']); ?></td>
-                                <td>$<?php echo number_format($compra['precio'] * $compra['cantidad']); ?></td>
+
+                                <td>$<?php echo number_format($compra['precio']); ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -179,14 +252,15 @@ $stats = $stmt_stats->fetch();
                 </div>
             <?php endif; ?>
         </div>
-        
+
         <div class="history-section">
             <h2 class="section-title">🔥 Historial de Horneados</h2>
-            
+
             <?php if (count($horneados) > 0): ?>
                 <table class="history-table">
                     <thead>
                         <tr>
+                            <th>Usuario</th>
                             <th>Fecha</th>
                             <th>Postre</th>
                             <th>Ingredientes</th>
@@ -195,15 +269,19 @@ $stats = $stmt_stats->fetch();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($horneados as $horneado): 
-                            $ingredientes = json_decode($horneado['ingredientes_usados'], true);
-                        ?>
+                        <?php foreach ($horneados as $horneado): ?>
                             <tr>
+                                <td><?php echo htmlspecialchars($horneado['nombre_usuario']); ?></td>
+
                                 <td><?php echo date('d/m/Y H:i', strtotime($horneado['fecha'])); ?></td>
-                                <td class="icon-cell"><?php echo $horneado['receta_icono']; ?> <?php echo htmlspecialchars($horneado['receta_nombre']); ?></td>
-                                <td><?php echo implode(', ', $ingredientes); ?></td>
+
+                                <td>🍰 <?php echo htmlspecialchars($horneado['receta_nombre']); ?></td>
+
+                                <td>No disponible</td> <!-- no tienes ingredientes -->
+
                                 <td>+$<?php echo number_format($horneado['recompensa']); ?></td>
-                                <td><?php echo $horneado['es_nueva'] ? '<span class="badge-new">✨ Nueva receta!</span>' : ''; ?></td>
+
+                                <td></td> <!-- no tienes es_nueva -->
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -218,4 +296,5 @@ $stats = $stmt_stats->fetch();
         </div>
     </div>
 </body>
+
 </html>

@@ -1,7 +1,11 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $usuario_logueado = isset($_SESSION['usuario_id']);
 $usuario_nombre = $_SESSION['usuario_nombre'] ?? '';
+$usuario_tipo = $_SESSION['usuario_tipo'] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -14,49 +18,135 @@ $usuario_nombre = $_SESSION['usuario_nombre'] ?? '';
   <link rel="stylesheet" href="Css/usuario.css">
   <title>Sweet Bakery - Juego de Panadería</title>
 </head>
+<style>
+  .nav-tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin: 15px;
+}
 
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-tab {
+    background: #f1f1f1;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-tab:hover {
+    background: #ff6b6b;
+    color: white;
+}
+
+.nav-tab.active {
+    background: #ff6b6b;
+    color: white;
+}
+
+/* Usuario */
+.user-name {
+    font-weight: bold;
+    color: #ff6b6b;
+    margin-right: 10px;
+}
+
+/* Botones */
+.btn-save, .btn-load {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.btn-load {
+    background: #2196f3;
+}
+
+.btn-logout {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Invitado */
+.btn-login, .btn-register {
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: white;
+}
+
+.btn-login {
+    background: #2196f3;
+}
+
+.btn-register {
+    background: #ff6b6b;
+}
+</style>
 <body>
 
-  <!-- Navigation Tabs -->
-  <nav class="nav-tabs">
+<nav class="nav-tabs">
+
+  <div class="nav-left">
     <button class="nav-tab active" onclick="switchModule('kitchen')">
-      <span>🍳</span> Cocina
+      🍳 Cocina
     </button>
     <button class="nav-tab" onclick="switchModule('shop')">
-      <span>🛒</span> Tienda
+      🛒 Tienda
     </button>
     <button class="nav-tab" onclick="switchModule('medals')">
-      <span>🏆</span> Medallas
+      🏆 Medallas
     </button>
+ <?php if ($usuario_logueado && $usuario_tipo === 'admin'): ?>
     <button class="nav-tab" onclick="location.href='historial.php'">
-      <span>🏆</span> Historial
+      📜 Historial
     </button>
+    <button class="nav-tab" onclick="location.href='usuarios.php'">
+        👥 Usuarios
+    </button>
+<?php endif; ?>
+  </div>
 
-    <div class="nav-user">
-      <?php if ($usuario_logueado): ?>
+  <div class="nav-right">
+    <?php if ($usuario_logueado): ?>
 
-          <span style="color: #ff6b6b;">
-            <?php echo htmlspecialchars($usuario_nombre); ?>
-          </span>
-          <button  onclick="location.href='controler/cerrar_sesion.php'"> 
-            Cerrar Sesión
-          </button>
-        </div>
-        <div>
-          <button class="nav-tab" onclick="guardarPartida()"> 💾 Guardar </button>
-        </div>
-        <div>
-          <button class="nav-tab" class="nav-tab" onclick="cargarPartida()"> 📂 Cargar </button>
-        </div>
-      <?php else: ?>
-        <div>
-          <a href="login.php">🔐 Iniciar Sesión</a>
-          <a href="formulario_usuario.php">📝 Registrarse</a>
-        </div>
-      <?php endif; ?>
-    </div>
+      <span class="user-name">
+        👤 <?php echo htmlspecialchars($usuario_nombre . ' (' . $usuario_tipo . ')'); ?>
+      </span>
 
-  </nav>
+      <button class="btn-save" onclick="guardarPartida()">💾</button>
+      <button class="btn-load" onclick="cargarPartida()">📂</button>
+      <button class="btn-logout" onclick="location.href='controler/cerrar_sesion.php'">
+        Cerrar
+      </button>
+
+    <?php else: ?>
+
+      <a class="btn-login" href="login.php">🔐 Login</a>
+      <a class="btn-register" href="formulario_usuario.php">📝 Registro</a>
+
+    <?php endif; ?>
+  </div>
+
+</nav>
 
   <script src="JS/sweet.js"></script>
 </body>

@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Mostrar mensajes de sesión
 $error = $_SESSION['error_registro'] ?? '';
